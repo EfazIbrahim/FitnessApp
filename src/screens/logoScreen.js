@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
 
 const LogoScreen = () => (
     <View style={styles.container}>
-        <Image source={require('../../assets/Logo.png')} />
+        <Image source={require('../../assets/logo.png')} />
     </View>
 );
 
