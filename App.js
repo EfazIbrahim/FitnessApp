@@ -17,6 +17,12 @@ import workoutIcon from './assets/workoutIcon.png';
 import goalsIcon from './assets/goalsIcon.png';
 import settingsIcon from './assets/settingsIcon.png';
 
+import { Amplify } from 'aws-amplify';
+import amplifyconfig from './src/amplifyconfiguration.json';
+Amplify.configure(amplifyconfig);
+
+import { withAuthenticator } from '@aws-amplify/ui-react-native';
+
 const Tab = createBottomTabNavigator();
 
 class App extends React.Component {
@@ -73,5 +79,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
-
+export default withAuthenticator(App);
