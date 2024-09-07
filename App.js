@@ -3,7 +3,9 @@ import store from './src/redux/store';
 import {Provider} from 'react-redux';
 import { Image } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+
 
 // Screens
 import HomeScreen from './src/screens/homeScreen';
@@ -12,6 +14,7 @@ import GoalsScreen from "./src/screens/goalsScreen";
 import SettingsScreen from "./src/screens/settingsScreen";
 import RoutineScreen from "./src/screens/routineScreen";
 import LogoScreen from './src/screens/logoScreen';
+import createWorkoutScreen from './src/screens/createWorkoutScreen';
 
 // Icons
 import routinesIcon from './assets/calendarIcon.png';
@@ -28,6 +31,25 @@ Amplify.configure(amplifyconfig);
 import { withAuthenticator } from '@aws-amplify/ui-react-native';
 
 const Tab = createBottomTabNavigator();
+const RoutineStack = createStackNavigator();
+
+const RoutineStackNavigator = () => {
+    return (
+        <RoutineStack.Navigator initialRouteName={"Routine"}
+        >
+            <RoutineStack.Screen name="Routine" component={RoutineScreen}
+                options={{headerShown: false}}
+            />
+            <RoutineStack.Screen name="CreateWorkout" component={createWorkoutScreen}
+                options={{
+                    headerStyle: { backgroundColor: 'black' },
+                    headerTintColor: 'white',
+                    title : 'Back to Routines',
+                }}
+            />
+        </RoutineStack.Navigator>
+    );
+};
 
 class AppUnlocked extends React.Component {
 
@@ -55,10 +77,11 @@ class AppUnlocked extends React.Component {
 
                             },
                             tabBarActiveTintColor: 'tomato',
-                            tabBarInactiveTintColor: 'gray',
+                            tabBarInactiveTintColor: 'white',
+                            tabBarStyle: { backgroundColor: 'black' },
                         })}
                     >
-                        <Tab.Screen name="Routines" component={RoutineScreen}/>
+                        <Tab.Screen name="Routines" component={RoutineStackNavigator} />
                         <Tab.Screen name="Goals" component={GoalsScreen} />
                         <Tab.Screen name="Home" component={HomeScreen} />
                         <Tab.Screen name="Workouts" component={WorkoutScreen} />

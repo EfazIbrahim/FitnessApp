@@ -1,8 +1,8 @@
-import { createStore } from 'redux';
-import {reducer as form} from 'redux-form'; // Adjust the path according to your project structure
+import { configureStore } from '@reduxjs/toolkit';
+import rootReducer from './reducers';
 
-const store = createStore(
-    form,
-);
+const store = configureStore({
+    reducer: rootReducer
+});
 
 export default store;

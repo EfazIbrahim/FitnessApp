@@ -5,7 +5,6 @@ import {StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 import { setRoutine } from '../redux/actions';
 import CustomButton from "../components/customButton";
-import createWorkoutScreen from "./createWorkoutScreen";
 
 const styles = StyleSheet.create({
     appContainer: {
@@ -14,8 +13,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         backgroundColor: '#000000',
     },
-    title: {
-        fontSize: 27,
+    text: {
+        fontSize: 23,
         fontWeight: 'bold',
         color: '#ffffff',
         marginBottom: 5,
@@ -25,34 +24,40 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         marginTop: 5,
     },
+    input: {
+        height: 40,
+        borderColor: '#ffffff',
+        borderWidth: 1,
+        color: '#ffffff',
+        marginBottom: 10,
+        paddingHorizontal: 10,
+    },
 });
 
-export class RoutineScreen extends React.Component {
+export class CreateWorkoutScreen extends React.Component {
 
     static propTypes = {
         navigation: PropTypes.object.isRequired,
         routine: PropTypes.object,
     }
-    static FORM_NAME = 'RoutineScreen';
+    static FORM_NAME = 'CreateWorkoutScreen';
     static FIELD_NAMES = {};
 
     handleCreateWorkout = () => {
-        this.props.navigation.navigate('CreateWorkout');
+
     }
 
     render() {
         const { routine } = this.props;
-        const isRoutineEmpty = Object.keys(routine).length === 0;
+
         return (
             <View style={styles.appContainer}>
-                <Text style={styles.title}>Routines</Text>
-                <View style={styles.underline} />
-                {isRoutineEmpty ? (
-                    <CustomButton title="Create Routine +" onPress={this.handleCreateWorkout} />
-                ) : (
-                    <Text style={styles.title}>Routine is not empty</Text>
-                )}
-                <View style={styles.underline} />
+                <Text style={styles.text}>Name</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Enter workout name"
+                    placeholderTextColor="#888"
+                />
             </View>
         );
     }
@@ -63,4 +68,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps)(RoutineScreen);
+export default connect(mapStateToProps)(CreateWorkoutScreen);

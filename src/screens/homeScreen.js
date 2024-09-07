@@ -1,49 +1,75 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { formValueSelector, FieldArray, reduxForm, Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import {StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import CustomButton from "../components/customButton";
+
+import { setRoutine } from '../redux/actions';
+
 
 const styles = StyleSheet.create({
     appContainer: {
         flex: 1,
-        paddingTop: 70,
-        paddingHorizontal: 20,
+        paddingTop: 25,
+        paddingHorizontal: 10,
+        backgroundColor: '#000000',
     },
-
+    title: {
+        fontSize: 27,
+        fontWeight: 'bold',
+        color: '#ffffff',
+        marginBottom: 5,
+    },
+    underline: {
+        height: 2,
+        backgroundColor: '#ffffff',
+        marginTop: 5,
+    },
 });
 
 export class HomeScreen extends React.Component {
     static propTypes = {
-        navigation: PropTypes.object.isRequired
+        navigation: PropTypes.object.isRequired,
+        routine: PropTypes.object,
+        setRoutine: PropTypes.func.isRequired,
     }
-    static FORM_NAME = 'HomeScreen';
-    static FIELD_NAMES = {};
-    // handlePress = () => {
-    //     let {navigation} = this.props;
-    //     navigation.navigate('Workout');
-    // }
+
+    handleCreateWorkout = () => {
+        const { navigation, setRoutine } = this.props;
+        const dummyRoutine = {
+            name: 'Dummy Routine',
+            exercises: ['Push-ups', 'Squats', 'Plank']
+        };
+        // setRoutine(dummyRoutine);
+        navigation.navigate('Routines');
+    }
 
     render() {
+        const { routine } = this.props;
+        const isRoutineEmpty = Object.keys(routine).length === 0;
+
         return (
             <View style={styles.appContainer}>
-                <Text>HomePage</Text>
-                {/*<Button title='Tap Me' onPress={this.handlePress}></Button>*/}
+                <Text style={styles.title}>Today's Workout</Text>
+                <View style={styles.underline} />
+                {isRoutineEmpty ? (
+                    <CustomButton title="Create Routine +" onPress={this.handleCreateWorkout} />
+                ) : (
+                    <Text style={styles.title}>Routine is not empty</Text>
+                )}
+                <View style={styles.underline} />
             </View>
         );
     }
 }
-let mapStateToProps = state => ({
-    // goals: formValueSelector(HomeScreen.FORM_NAME)(state, HomeScreen.FIELD_NAMES.GOALS),
-    // enteredText: formValueSelector(HomeScreen.FORM_NAME)(state, HomeScreen.FIELD_NAMES.ENTERED_TEXT)
+
+const mapStateToProps = state => ({
+    routine: state.app.routine,
 });
-// let initialFormValues = {
-//     [HomeScreen.FIELD_NAMES.GOALS]: [],
-//     [HomeScreen.FIELD_NAMES.ENTERED_TEXT]: ''
-// };
-let reduxFormConfig = {
-    form: HomeScreen.FORM_NAME,
-    // initialValues: initialFormValues
+
+const mapDispatchToProps = {
+    setRoutine
 };
-let ReduxForm = reduxForm(reduxFormConfig)(HomeScreen);
-export default connect(mapStateToProps)(ReduxForm);
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
