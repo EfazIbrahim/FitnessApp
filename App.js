@@ -9,12 +9,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 // Screens
 import HomeScreen from './src/screens/homeScreen';
-import WorkoutScreen from './src/screens/workoutScreen';
+import WorkoutScreen from './src/screens/Workout/workoutScreen';
 import GoalsScreen from "./src/screens/goalsScreen";
 import SettingsScreen from "./src/screens/settingsScreen";
-import RoutineScreen from "./src/screens/routineScreen";
+import RoutineScreen from "./src/screens/Routine/routineScreen";
 import LogoScreen from './src/screens/logoScreen';
-import createWorkoutScreen from './src/screens/createWorkoutScreen';
+import createRoutineScreen from './src/screens/Routine/createRoutineScreen';
+import createWorkoutScreen from './src/screens/Workout/createWorkoutScreen';
 
 // Icons
 import routinesIcon from './assets/calendarIcon.png';
@@ -32,6 +33,7 @@ import { withAuthenticator } from '@aws-amplify/ui-react-native';
 
 const Tab = createBottomTabNavigator();
 const RoutineStack = createStackNavigator();
+const WorkoutStack = createStackNavigator();
 
 const RoutineStackNavigator = () => {
     return (
@@ -40,7 +42,7 @@ const RoutineStackNavigator = () => {
             <RoutineStack.Screen name="Routine" component={RoutineScreen}
                 options={{headerShown: false}}
             />
-            <RoutineStack.Screen name="CreateWorkout" component={createWorkoutScreen}
+            <RoutineStack.Screen name="CreateRoutine" component={createRoutineScreen}
                 options={{
                     headerStyle: { backgroundColor: 'black' },
                     headerTintColor: 'white',
@@ -50,6 +52,24 @@ const RoutineStackNavigator = () => {
         </RoutineStack.Navigator>
     );
 };
+
+const WorkoutStackNavigator = () => {
+    return (
+        <WorkoutStack.Navigator initialRouteName={"Workout"}
+        >
+            <WorkoutStack.Screen name="Workout" component={WorkoutScreen}
+                options={{headerShown: false}}
+            />
+            <WorkoutStack.Screen name="CreateWorkout" component={createWorkoutScreen}
+                options={{
+                    headerStyle: { backgroundColor: 'black' },
+                    headerTintColor: 'white',
+                    title : 'Back to Workouts',
+                }}
+            />
+        </WorkoutStack.Navigator>
+    );
+}
 
 class AppUnlocked extends React.Component {
 
@@ -84,7 +104,7 @@ class AppUnlocked extends React.Component {
                         <Tab.Screen name="Routines" component={RoutineStackNavigator} />
                         <Tab.Screen name="Goals" component={GoalsScreen} />
                         <Tab.Screen name="Home" component={HomeScreen} />
-                        <Tab.Screen name="Workouts" component={WorkoutScreen} />
+                        <Tab.Screen name="Workouts" component={WorkoutStackNavigator} />
                         <Tab.Screen name="Settings" component={SettingsScreen} />
                     </Tab.Navigator>
                 </NavigationContainer>

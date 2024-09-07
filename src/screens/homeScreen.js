@@ -34,7 +34,7 @@ export class HomeScreen extends React.Component {
         setRoutine: PropTypes.func.isRequired,
     }
 
-    handleCreateWorkout = () => {
+    handleCreateRoutine = () => {
         const { navigation, setRoutine } = this.props;
         const dummyRoutine = {
             name: 'Dummy Routine',
@@ -53,7 +53,7 @@ export class HomeScreen extends React.Component {
                 <Text style={styles.title}>Today's Workout</Text>
                 <View style={styles.underline} />
                 {isRoutineEmpty ? (
-                    <CustomButton title="Create Routine +" onPress={this.handleCreateWorkout} />
+                    <CustomButton title="Create Routine +" onPress={this.handleCreateRoutine} />
                 ) : (
                     <Text style={styles.title}>Routine is not empty</Text>
                 )}

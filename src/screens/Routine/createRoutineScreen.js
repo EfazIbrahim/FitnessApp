@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
-import { setRoutine } from '../redux/actions';
-import CustomButton from "../components/customButton";
+import { setRoutine } from '../../redux/actions';
+import CustomButton from "../../components/customButton";
 
 const styles = StyleSheet.create({
     appContainer: {
@@ -34,18 +34,14 @@ const styles = StyleSheet.create({
     },
 });
 
-export class CreateWorkoutScreen extends React.Component {
+export class CreateRoutineScreen extends React.Component {
 
     static propTypes = {
         navigation: PropTypes.object.isRequired,
         routine: PropTypes.object,
     }
-    static FORM_NAME = 'CreateWorkoutScreen';
+    static FORM_NAME = 'CreateRoutineScreen';
     static FIELD_NAMES = {};
-
-    handleCreateWorkout = () => {
-
-    }
 
     render() {
         const { routine } = this.props;
@@ -55,7 +51,7 @@ export class CreateWorkoutScreen extends React.Component {
                 <Text style={styles.text}>Name</Text>
                 <TextInput
                     style={styles.input}
-                    placeholder="Enter workout name"
+                    placeholder="Enter Routine name"
                     placeholderTextColor="#888"
                 />
             </View>
@@ -68,4 +64,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps)(CreateWorkoutScreen);
+export default connect(mapStateToProps)(CreateRoutineScreen);

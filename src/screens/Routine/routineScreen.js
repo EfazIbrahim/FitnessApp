@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
-import { setRoutine } from '../redux/actions';
-import CustomButton from "../components/customButton";
-import createWorkoutScreen from "./createWorkoutScreen";
+import { setRoutine } from '../../redux/actions';
+import CustomButton from "../../components/customButton";
+
 
 const styles = StyleSheet.create({
     appContainer: {
@@ -36,8 +36,8 @@ export class RoutineScreen extends React.Component {
     static FORM_NAME = 'RoutineScreen';
     static FIELD_NAMES = {};
 
-    handleCreateWorkout = () => {
-        this.props.navigation.navigate('CreateWorkout');
+    handleCreateRoutine = () => {
+        this.props.navigation.navigate('CreateRoutine');
     }
 
     render() {
@@ -48,7 +48,7 @@ export class RoutineScreen extends React.Component {
                 <Text style={styles.title}>Routines</Text>
                 <View style={styles.underline} />
                 {isRoutineEmpty ? (
-                    <CustomButton title="Create Routine +" onPress={this.handleCreateWorkout} />
+                    <CustomButton title="Create Routine +" onPress={this.handleCreateRoutine} />
                 ) : (
                     <Text style={styles.title}>Routine is not empty</Text>
                 )}
