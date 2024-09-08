@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import CustomButton from "../components/customButton";
 
-import { setRoutine } from '../redux/actions';
+import { setRoutines } from '../redux/actions';
 
 
 const styles = StyleSheet.create({
@@ -30,12 +30,12 @@ const styles = StyleSheet.create({
 export class HomeScreen extends React.Component {
     static propTypes = {
         navigation: PropTypes.object.isRequired,
-        routine: PropTypes.object,
-        setRoutine: PropTypes.func.isRequired,
+        routines: PropTypes.array,
+        setRoutines: PropTypes.func.isRequired,
     }
 
     handleCreateRoutine = () => {
-        const { navigation, setRoutine } = this.props;
+        const { navigation, setRoutines } = this.props;
         const dummyRoutine = {
             name: 'Dummy Routine',
             exercises: ['Push-ups', 'Squats', 'Plank']
@@ -45,8 +45,8 @@ export class HomeScreen extends React.Component {
     }
 
     render() {
-        const { routine } = this.props;
-        const isRoutineEmpty = Object.keys(routine).length === 0;
+        const { routines } = this.props;
+        const isRoutineEmpty = Object.keys(routines).length === 0;
 
         return (
             <View style={styles.appContainer}>
@@ -64,11 +64,11 @@ export class HomeScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    routine: state.app.routine,
+    routines: state.app.routines,
 });
 
 const mapDispatchToProps = {
-    setRoutine
+    setRoutines
 };
 
 

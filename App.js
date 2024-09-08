@@ -55,9 +55,9 @@ const RoutineStackNavigator = () => {
 
 const WorkoutStackNavigator = () => {
     return (
-        <WorkoutStack.Navigator initialRouteName={"Workout"}
+        <WorkoutStack.Navigator initialRouteName={"Workouts"}
         >
-            <WorkoutStack.Screen name="Workout" component={WorkoutScreen}
+            <WorkoutStack.Screen name="Workouts" component={WorkoutScreen}
                 options={{headerShown: false}}
             />
             <WorkoutStack.Screen name="CreateWorkout" component={createWorkoutScreen}
@@ -84,13 +84,13 @@ class AppUnlocked extends React.Component {
                                 let iconName;
                                 if (route.name === 'Home') {
                                     iconName = homeIcon;
-                                } else if (route.name === 'Workouts') {
+                                } else if (route.name === 'WorkoutsStack') {
                                     iconName = workoutIcon;
                                 } else if (route.name === 'Goals') {
                                     iconName = goalsIcon;
                                 } else if (route.name === 'Settings') {
                                     iconName = settingsIcon;
-                                } else if (route.name === 'Routines') {
+                                } else if (route.name === 'RoutinesStack') {
                                     iconName = routinesIcon;
                                 }
                                 return <Image source={iconName} style={{ width: size, height: size }} />;
@@ -101,10 +101,10 @@ class AppUnlocked extends React.Component {
                             tabBarStyle: { backgroundColor: 'black' },
                         })}
                     >
-                        <Tab.Screen name="Routines" component={RoutineStackNavigator} />
+                        <Tab.Screen name="RoutinesStack" component={RoutineStackNavigator} />
                         <Tab.Screen name="Goals" component={GoalsScreen} />
                         <Tab.Screen name="Home" component={HomeScreen} />
-                        <Tab.Screen name="Workouts" component={WorkoutStackNavigator} />
+                        <Tab.Screen name="WorkoutsStack" component={WorkoutStackNavigator} />
                         <Tab.Screen name="Settings" component={SettingsScreen} />
                     </Tab.Navigator>
                 </NavigationContainer>

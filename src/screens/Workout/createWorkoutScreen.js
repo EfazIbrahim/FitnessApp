@@ -1,10 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 
-import { setRoutine } from '../../redux/actions';
 import CustomButton from "../../components/customButton";
+import {setWorkouts} from '../../redux/actions';
 
 const styles = StyleSheet.create({
     appContainer: {
@@ -38,10 +38,25 @@ export class CreateWorkoutScreen extends React.Component {
 
     static propTypes = {
         navigation: PropTypes.object.isRequired,
-        routine: PropTypes.object,
+        routine: PropTypes.array,
+        workouts: PropTypes.array,
+        setWorkouts: PropTypes.func.isRequired,
     }
     static FORM_NAME = 'CreateWorkoutScreen';
     static FIELD_NAMES = {};
+
+    state = {
+        workoutName: '',
+        exercises: [],
+    };
+
+    handleCreateWorkout = () => {
+        const { workoutName, exercises } = this.state;
+        const newWorkout = { name: workoutName, exercises };
+        this.props.setWorkouts(newWorkout);
+        console.log(this.props.workouts);
+        this.props.navigation.navigate('Workouts');
+    }
 
 
     render() {
@@ -54,15 +69,21 @@ export class CreateWorkoutScreen extends React.Component {
                     style={styles.input}
                     placeholder="Enter workout name"
                     placeholderTextColor="#888"
+                    onChangeText={(text) => this.setState({ workoutName: text })}
                 />
+                <CustomButton title="Create Workout" onPress={this.handleCreateWorkout} />
+
             </View>
         );
     }
 }
 
-const mapStateToProps = state => ({
-    routine: state.app.routine,
+const mapStateToProps = (state) => ({
+    workouts: state.app.workouts,
 });
 
+const mapDispatchToProps = {
+    setWorkouts,
+};
 
-export default connect(mapStateToProps)(CreateWorkoutScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateWorkoutScreen);

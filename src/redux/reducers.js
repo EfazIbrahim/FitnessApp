@@ -1,15 +1,22 @@
 import { combineReducers } from 'redux';
 
+
 const initialState = {
-    routine: {},
+    routines: [],
+    workouts: [],
 };
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'SET_ROUTINE':
+        case 'SET_ROUTINES':
             return {
                 ...state,
-                routine: action.payload
+                routines: [...state.routines, action.payload],
+            };
+        case 'SET_WORKOUTS':
+            return {
+                ...state,
+                workouts: [...state.workouts, action.payload],
             };
         default:
             return state;

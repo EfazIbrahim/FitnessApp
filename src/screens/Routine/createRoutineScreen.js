@@ -38,13 +38,13 @@ export class CreateRoutineScreen extends React.Component {
 
     static propTypes = {
         navigation: PropTypes.object.isRequired,
-        routine: PropTypes.object,
+        routines: PropTypes.array,
     }
     static FORM_NAME = 'CreateRoutineScreen';
     static FIELD_NAMES = {};
 
     render() {
-        const { routine } = this.props;
+        const { routines } = this.props;
 
         return (
             <View style={styles.appContainer}>
@@ -60,7 +60,7 @@ export class CreateRoutineScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    routine: state.app.routine,
+    routines: state.app.routines,
 });
 
 

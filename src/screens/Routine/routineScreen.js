@@ -31,7 +31,7 @@ export class RoutineScreen extends React.Component {
 
     static propTypes = {
         navigation: PropTypes.object.isRequired,
-        routine: PropTypes.object,
+        routines: PropTypes.array,
     }
     static FORM_NAME = 'RoutineScreen';
     static FIELD_NAMES = {};
@@ -41,17 +41,13 @@ export class RoutineScreen extends React.Component {
     }
 
     render() {
-        const { routine } = this.props;
-        const isRoutineEmpty = Object.keys(routine).length === 0;
+        const { routines } = this.props;
+        const isRoutineEmpty = Object.keys(routines).length === 0;
         return (
             <View style={styles.appContainer}>
                 <Text style={styles.title}>Routines</Text>
                 <View style={styles.underline} />
-                {isRoutineEmpty ? (
-                    <CustomButton title="Create Routine +" onPress={this.handleCreateRoutine} />
-                ) : (
-                    <Text style={styles.title}>Routine is not empty</Text>
-                )}
+                <CustomButton title="Create Routine +" onPress={this.handleCreateRoutine} />
                 <View style={styles.underline} />
             </View>
         );
@@ -59,7 +55,7 @@ export class RoutineScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    routine: state.app.routine,
+    routines: state.app.routines,
 });
 
 
