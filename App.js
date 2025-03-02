@@ -1,3 +1,4 @@
+// React and Redux
 import React, {useState, useEffect} from 'react';
 import store from './src/redux/store';
 import {Provider} from 'react-redux';
@@ -5,7 +6,6 @@ import { Image } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-
 
 // Screens
 import HomeScreen from './src/screens/homeScreen';
@@ -66,13 +66,13 @@ const WorkoutStackNavigator = () => {
 }
 
 class AppUnlocked extends React.Component {
-
     render() {
         return (
             <Provider store={store}>
                 <NavigationContainer>
                     <Tab.Navigator initialRouteName = "Home" backBehavior = "history"
                         screenOptions={({ route }) => ({
+
                             headerShown: false,
                             tabBarIcon: ({ focused, color, size }) => {
                                 let iconName;

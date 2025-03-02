@@ -41,7 +41,7 @@ export class HomeScreen extends React.Component {
             exercises: ['Push-ups', 'Squats', 'Plank']
         };
         // setRoutine(dummyRoutine);
-        navigation.navigate('Routines');
+        navigation.navigate('RoutinesStack');
     }
 
     render() {

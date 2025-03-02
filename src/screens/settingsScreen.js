@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { formValueSelector, FieldArray, reduxForm, Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import {StyleSheet, Text, View, Button, TextInput } from 'react-native';
-import {useAuthenticator} from '@aws-amplify/ui-react-native';
 
 
 
@@ -15,7 +14,7 @@ const styles = StyleSheet.create({
     },
 });
 
-class SettingsScreenClass extends React.Component {
+class SettingsScreen extends React.Component {
 
     static propTypes = {
         signOut: PropTypes.func.isRequired
@@ -34,9 +33,8 @@ class SettingsScreenClass extends React.Component {
     }
 }
 
-const SettingsScreen = () => {
-    const { signOut } = useAuthenticator();
-    return <SettingsScreenClass signOut={signOut} />;
-};
+const mapStateToProps = state => ({
+    signOut: state.app.signOut
+});
 
 export default SettingsScreen;
