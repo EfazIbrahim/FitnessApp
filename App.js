@@ -24,12 +24,6 @@ import workoutIcon from './assets/workoutIcon.png';
 import goalsIcon from './assets/goalsIcon.png';
 import settingsIcon from './assets/settingsIcon.png';
 
-// Amplify
-import { Amplify } from 'aws-amplify';
-import amplifyconfig from './src/amplifyconfiguration.json';
-Amplify.configure(amplifyconfig);
-
-import { withAuthenticator } from '@aws-amplify/ui-react-native';
 
 const Tab = createBottomTabNavigator();
 const RoutineStack = createStackNavigator();
@@ -113,17 +107,4 @@ class AppUnlocked extends React.Component {
     }
 }
 
-const MainApp =  withAuthenticator(AppUnlocked);
-
-export default App = () => {
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 2000); // Adjust time as necessary
-    }, []);
-
-    return isLoading ? <LogoScreen /> : <MainApp />;
-};
-
+export default AppUnlocked;
